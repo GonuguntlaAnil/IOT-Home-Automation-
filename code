@@ -1,28 +1,27 @@
-// Define LED pin
-int ledPin = 13;
-
-void setup() {
-  // Initialize serial communication
-  Serial.begin(9600);
-  
-  // Set LED pin as output
-  pinMode(ledPin, OUTPUT);
-}
-
-void loop() {
-  // Check if data is available to read
-  if (Serial.available() > 0) {
-    // Read the incoming byte
-    char incomingByte = Serial.read();
-    
-    // Perform action based on the command received
-    if (incomingByte == '1') {
-      digitalWrite(ledPin, HIGH); // Turn LED ON
-      Serial.println("LED ON");
-    } else if (incomingByte == '0') {
-      digitalWrite(ledPin, LOW); // Turn LED OFF
-      Serial.println("LED OFF");
-    }
-  }
-  delay(100); // Delay for stability
-}
+void setup()  
+ {  
+ Serial.begin(9600); // buart rate  
+ pinMode(12,OUTPUT); // RELAY MODULE  
+ pinMode(11,OUTPUT); // LED  
+ digitalWrite(12,HIGH); // relay module high  
+ }  
+ void loop()  
+ {  
+ if(Serial.available()>0)  
+ {  
+ char data= Serial.read();  
+ Serial.println(data);  
+ if(data=='a')  
+ {  
+ digitalWrite(12,LOW); // RELAY ON  
+ digitalWrite(11,HIGH); // LED ON  
+ Serial.println("RELAY AND LED ON");  
+ }  
+ if(data=='b')  
+ {  
+ digitalWrite(12,HIGH); // RELAY OFF  
+ digitalWrite(11,LOW); // LED OFF  
+ Serial.println("RELAY AND LED OFF");  
+ }  
+ }  
+ }  
